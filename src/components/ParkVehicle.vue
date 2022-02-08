@@ -9,7 +9,7 @@
       :rules="rules"
       :model="parkForm">
       <el-form-item label="V.I.N" prop="vin">
-        <el-input v-model="parkForm.vin"></el-input>
+        <el-input v-model.trim="parkForm.vin"></el-input>
       </el-form-item>
       <el-form-item label="Type" prop="type">
         <el-select

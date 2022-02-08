@@ -26,7 +26,8 @@
         :key="entryPoint.id"
         :label="entryPoint.name"
         :label-width="82"
-        prop="distance">
+        prop="distance"
+        required>
         <el-input-number
           v-model.number="slotForm.distance[entryPoint.id]"
           :label="entryPoint.name"

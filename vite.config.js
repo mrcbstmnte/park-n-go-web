@@ -3,7 +3,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-const BACKEND_URL = 'http://localhost:3031'
+const BACKEND_URL = 'http://localhost:3030'
 
 // https://vitejs.dev/config/
 export default defineConfig({

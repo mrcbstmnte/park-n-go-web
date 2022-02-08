@@ -112,6 +112,8 @@ import SlotDetails from '@/components/SlotDetails.vue'
 import PaymentSuccess from '@/components/PaymentSuccess.vue'
 import Loader from '@/components/Loader.vue'
 
+import { showError } from '@/helpers'
+
 export default {
   components: {
     ArrowDown,
@@ -176,48 +178,68 @@ export default {
     },
 
     async handleEntryPointAdd(data) {
-      const name = data.name
-      const addedEntryPoint = await api.entryPoints.create(this.lotId, name)
+      try {
+        const name = data.name
+        const addedEntryPoint = await api.entryPoints.create(this.lotId, name)
 
-      this.entryPoints.push(addedEntryPoint)
-      this.entryPointDialogVisible = false
+        this.entryPoints.push(addedEntryPoint)
+        this.entryPointDialogVisible = false
+      } catch (error) {
+        showError(error)
+      }
     },
     async handleVehiclePark(data) {
-      const { slotId } = await api.invoices.create(this.selectedEntryPointId, {
-        vin: data.vin,
-        type: data.type
-      })
+      try {
+        const { slotId } = await api.invoices.create(this.selectedEntryPointId, {
+          vin: data.vin,
+          type: data.type
+        })
 
-      this.updateOccupancy(slotId, true)
+        this.updateOccupancy(slotId, true)
 
-      this.parkVehicleDialogVisible = false
+        this.parkVehicleDialogVisible = false
+      } catch (error) {
+        showError(error)
+      }
     },
     async handleSlotClick(slotId) {
-      this.isFetchingSlot = true
+      try {
+        this.isFetchingSlot = true
 
-      this.toggleSlotDialog()
-      
-      this.selectedSlot = await api.slots.get(slotId)
+        this.toggleSlotDialog()
+        
+        this.selectedSlot = await api.slots.get(slotId)
 
-      this.isFetchingSlot = false
-      this.selectedSlotId = slotId
+        this.isFetchingSlot = false
+        this.selectedSlotId = slotId
+      } catch (error) {
+        showError(error)
+      }
     },
     async handlerSlotAdd(data) {
-      const addedSlot = await api.slots.create(this.lotId, [
-        data
-      ])
+      try {
+        const addedSlot = await api.slots.create(this.lotId, [
+          data
+        ])
 
-      this.slots.push(addedSlot)
-      this.addSlotDialogVisible = false
+        this.slots.push(addedSlot)
+        this.addSlotDialogVisible = false
+      } catch (error) {
+        showError(error)
+      }
     },
     async handleInvoiceSettle(data) {
-      const settledInvoice = await api.invoices.settle(data.invoiceId, data.endDate)
+      try {
+        const settledInvoice = await api.invoices.settle(data.invoiceId, data.endDate)
 
-      this.amountSettled = settledInvoice.amount
-      this.slotDialogVisible = false
-      this.paymentSuccessVisible = true
-      
-      this.updateOccupancy(settledInvoice.slotId, false)
+        this.amountSettled = settledInvoice.amount
+        this.slotDialogVisible = false
+        this.paymentSuccessVisible = true
+        
+        this.updateOccupancy(settledInvoice.slotId, false)
+      } catch (error) {
+        showError(error)
+      }
     },
 
     updateOccupancy(slotId, occupied) {

@@ -12,7 +12,7 @@
         :label-width="100"
         label="Name"
         prop="name">
-        <el-input v-model="addLotForm.name"></el-input>
+        <el-input v-model.trim="addLotForm.name"></el-input>
       </el-form-item>
       <el-form-item
         label="Entry points"

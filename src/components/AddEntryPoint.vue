@@ -9,7 +9,7 @@
       :rules="rules"
       :model="entryPointForm">
       <el-form-item label="Name" prop="name">
-        <el-input v-model="entryPointForm.name"></el-input>
+        <el-input v-model.trim="entryPointForm.name"></el-input>
       </el-form-item>
       <div class="dialog__footer">
         <el-button type="primary" @click="submitForm">

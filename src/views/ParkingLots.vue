@@ -38,6 +38,8 @@ import { api } from '@/service/api'
 
 import AddLot from '@/components/AddLot.vue'
 
+import { showError } from '@/helpers'
+
 export default {
   components: {
     Plus,
@@ -59,10 +61,14 @@ export default {
       this.addSlotDialogVisible = !this.addSlotDialogVisible
     },
     async handleAddLot(data) {
-      const createdLot = await api.lots.create(data.name, data.entryPoints)
+      try {
+        const createdLot = await api.lots.create(data.name, data.entryPoints)
 
-      this.lots.push(createdLot)
-      this.addSlotDialogVisible = false
+        this.lots.push(createdLot)
+        this.addSlotDialogVisible = false
+      } catch (error) {
+        showError(error)
+      }
     }
   }
 }

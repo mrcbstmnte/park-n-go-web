@@ -1,0 +1,15 @@
+{
+  "ConflictError": {
+    "has_unsettled_invoice": "Vehicle with the same VIN is already parked.",
+    "already_settled": "The invoice was already settled.",
+    "invalid_end_date": "The end date provided should not be earlier than the start date.",
+    "no_slots_available": "No slots available for the vehicle."
+  },
+  "NotFoundError": {
+    "vehicle": "Vehicle not found.",
+    "invoice": "Invoice not found.",
+    "entry_point": "Entry point not found.",
+    "lot": "Parking lot not found.",
+    "slot": "Parking slot not found."
+  }
+}
