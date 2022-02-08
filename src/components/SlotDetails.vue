@@ -49,7 +49,6 @@
             v-model="endDate"
             type="datetime"
             placeholder="Set end date (optional)"
-            format="YYYY/MM/DD hh:mm:ss"
             value-format="x">
           </el-date-picker>
           <el-button type="success" @click="settle">
@@ -110,7 +109,7 @@ export default {
       })
     },
     formattedDate(date) {
-      return moment.tz(date, 'Asia/Singapore').format()
+      return moment.tz(date, 'Asia/Singapore').format('MMMM DD YYYY, h:mm:ss a')
     }
   }
 }
